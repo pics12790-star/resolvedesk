@@ -1,0 +1,1 @@
+"""ResolveDesk application."""
