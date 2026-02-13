@@ -1,0 +1,10 @@
+.env
+.env.*
+.venv
+runtime
+apps/web/node_modules
+apps/web/dist
+.git
+docs/design
+__pycache__
+.pytest_cache
