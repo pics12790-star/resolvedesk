@@ -1,0 +1,10 @@
+export type User = {id:string;name:string;role:string;customer_id:string|null};
+export type Policy = {id:string;title:string;text:string;version:number;score?:number;sha256:string};
+export type Proposal = {action:string;explanation:string;customer_response:string;citations:string[];order_id:string;amount_cents:number|null};
+export type Metric = {provider:string;model:string;input_tokens:number;output_tokens:number;latency_ms:number;estimated_cost_usd:number|null};
+export type Run = {id:string;status:string;error:string|null;state:{intent?:string;policies?:Policy[];evidence?:Record<string,unknown>;proposal?:Proposal;receipt?:Record<string,unknown>;metrics?:Metric[];tool_calls?:number;automated_ms?:number}};
+export type Order = {id:string;product:string;total_cents:number;shipment_status:string;refund_status:string|null;replacement_id:string|null};
+export type Product = {id:string;name:string;description:string;price_cents:number;currency:string;stock:number;unlimited:boolean};
+export type Ticket = {id:string;customer_name:string;subject:string;message:string;order_id:string|null;status:string;created:number;runs?:Run[];order?:Order|null};
+export type Activity = {id:number;kind:string;message:string;data:Record<string,unknown>;created:number};
+export type EvalSummary = {id:string;mode:string;judge:string;created:string;cases:number;status:string;metrics:Record<string,number|null>;notes:string[]};
