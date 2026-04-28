@@ -1,0 +1,12 @@
+services:
+  resolvedesk:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file: .env
+    volumes:
+      - resolvedesk-data:/app/runtime
+      - ./evals/reports:/app/evals/reports
+    restart: unless-stopped
+volumes:
+  resolvedesk-data:
