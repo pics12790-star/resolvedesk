@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react';
-import {Inbox,ClipboardList,ShieldCheck,Store,Plus,ArrowUpRight,PanelLeftClose} from 'lucide-react';
+import {Inbox,ClipboardList,ShieldCheck,Store,Plus,ArrowUpRight,PanelLeftClose,Info} from 'lucide-react';
 import {api,post,isWalkthrough,repositoryUrl} from './api';
 import type {Ticket,User} from './types';
 import {InboxView} from './InboxView';
@@ -19,6 +19,11 @@ export default function App(){
    <div className="sidebar-bottom"><div className="store-label"><Store size={19}/><div>Demo store<small>Simulated transactions</small></div><span className="online-dot"/></div><label className="identity-label" htmlFor="identity">Demo identity</label><select id="identity" data-tour="identity-switcher" value={user?.id||'reviewer'} onChange={e=>switchUser(e.target.value)}><option value="reviewer">Jordan Smith · Reviewer</option><option value="maya">Maya Chen · Customer</option><option value="alex">Alex Rivera · Customer</option><option value="priya">Priya Kapoor · Customer</option></select><div className="provider-label">{providerLabel}<ArrowUpRight size={13}/></div></div>
   </aside>
   <main><button className="mobile-nav icon-button" aria-label="Toggle navigation" onClick={()=>setNavOpen(!navOpen)}><PanelLeftClose/></button><header className="page-header"><div><h1>{page==='Inbox'?'Support inbox':page}</h1><p>{page==='Inbox'?'Investigate with evidence. Resolve with confidence.':page==='Evaluations'?'Measure what works. Inspect what needs attention.':'The source of truth behind every resolution.'}</p></div><div className="header-actions"><DemoTour/>{page==='Inbox'&&<button className="primary" data-tour="new-ticket" onClick={()=>setShowNew(true)}><Plus size={18}/>{isWalkthrough?'Add enquiry':'New ticket'}</button>}</div></header>
+   {isWalkthrough&&<aside className="walkthrough-notice" aria-label="About this demo">
+    <Info size={19} aria-hidden="true"/>
+    <div><strong>Predefined workflow demo</strong><p>To avoid ongoing OpenAI API costs, this hosted version uses saved workflows instead of live AI calls. Explore the full implementation and local setup on GitHub.</p></div>
+    <a className="secondary walkthrough-notice-link" href={repositoryUrl} target="_blank" rel="noreferrer">View on GitHub<ArrowUpRight size={15} aria-hidden="true"/></a>
+   </aside>}
    {error&&<div className="error-banner" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
    {user&&(page==='Inbox'?<InboxView tickets={tickets} selected={selected} onSelect={setSelected} refresh={refresh} user={user}/>:page==='Evaluations'?<Evaluations/>:<Policies/>)}
    {!user&&!error&&<div className="empty">Connecting to your workspace…</div>}
