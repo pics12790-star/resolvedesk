@@ -1,0 +1,143 @@
+{
+  "id": "delivery",
+  "label": "Delivery enquiry",
+  "subject": "Where is my delivery?",
+  "message": "It missed the date by two days, but the tracking still changes. Do I just wait?",
+  "owner": "alex",
+  "source": "Saved benchmark case shipping-two-days-1 · 2026-10-07",
+  "order": {
+    "id": "ORD-1002",
+    "product": "Studio headphones",
+    "product_id": "E-f24fa5c8c571-product",
+    "total_cents": 12900,
+    "currency": "USD",
+    "delivered_days_ago": 4,
+    "replacement_id": null,
+    "shipment_status": "in_transit",
+    "days_late": 2,
+    "refund_status": null
+  },
+  "state": {
+    "intent": "delayed_delivery",
+    "policies": [
+      {
+        "id": "SHIP-01",
+        "title": "Delivery delays, lost shipments, and tracking exceptions",
+        "text": "Effective 2026-01-01. Version 1. Shipping policy applies when the product has not reached the customer, when tracking is confusing, or when the package is marked delivered but the customer says it is missing. Do not use the damaged-item policy until the customer has actually received the item and reports a physical problem with it. If an order is fewer than 3 days late and tracking is still updating, the agent should ask the customer to wait and continue monitoring.",
+        "version": 1,
+        "score": 0.0325,
+        "sha256": "0976661ab108d502e46c50ee68b7b2297aacec7cb0390a26e4071bd82e2613ca",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "REF-01",
+        "title": "Refund lifecycle, payment rails, and status communication",
+        "text": "Approved refunds are normally initiated by ResolveDesk within 2 business days. After initiation, the bank or wallet provider may take 5 to 10 business days to post the credit. The agent may explain this range, but it must not promise an exact posting date. Weekends, bank holidays, prepaid cards, and international cards may add delay. If a refund already exists, report its status and do not create another refund.",
+        "version": 1,
+        "score": 0.0295,
+        "sha256": "9c9bfb453afe0836d49771443c0bf09bf7b5ff04119e251946e56f37c0412881",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "SUB-01",
+        "title": "Subscriptions, renewals, and cancellation requests",
+        "text": "Subscription changes should not expose internal plan margins, retention scripts, or churn-risk scoring. The agent can provide customer-visible plan name, renewal date, and cancellation status. If the customer has both a hardware order and support subscription, the agent should keep the issues separate in the ticket summary.",
+        "version": 1,
+        "score": 0.028,
+        "sha256": "e43b7a51df7c0a93affb9a69e5a5388d6f561d5b251e2d094597c1a79f0179cd",
+        "retrieval": "hybrid_bm25_qdrant"
+      }
+    ],
+    "evidence": {
+      "id": "ORD-1002",
+      "product": "Studio headphones",
+      "product_id": "E-f24fa5c8c571-product",
+      "total_cents": 12900,
+      "currency": "USD",
+      "delivered_days_ago": 4,
+      "replacement_id": null,
+      "shipment_status": "in_transit",
+      "days_late": 2
+    },
+    "proposal": {
+      "action": "answer",
+      "explanation": "The order is 2 days late, and tracking is still updating. SHIP-01 says to wait and continue monitoring when an order is fewer than 3 days late and tracking is still updating.",
+      "customer_response": "Since your order is only two days late and tracking is still changing, please continue to monitor it for now. [SHIP-01]",
+      "citations": [
+        "SHIP-01"
+      ],
+      "order_id": "ORD-1002",
+      "amount_cents": null
+    },
+    "metrics": [
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 111,
+        "output_tokens": 32,
+        "latency_ms": 1728,
+        "estimated_cost_usd": null
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 1021,
+        "output_tokens": 157,
+        "latency_ms": 3350,
+        "estimated_cost_usd": null
+      }
+    ],
+    "tool_calls": 2,
+    "automated_ms": 8732.893943786621
+  },
+  "investigation": [
+    {
+      "kind": "classify",
+      "message": "Request classified",
+      "data": {
+        "intent": "delayed_delivery",
+        "provider": "openai"
+      }
+    },
+    {
+      "kind": "retrieve",
+      "message": "Relevant policies retrieved",
+      "data": {
+        "sources": [
+          "SHIP-01",
+          "REF-01",
+          "SUB-01"
+        ]
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_order",
+      "data": {
+        "id": "ORD-1002",
+        "product": "Studio headphones",
+        "product_id": "E-f24fa5c8c571-product",
+        "total_cents": 12900,
+        "currency": "USD",
+        "delivered_days_ago": 4,
+        "replacement_id": null
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_shipment",
+      "data": {
+        "delivered_days_ago": 4,
+        "shipment_status": "in_transit",
+        "days_late": 2
+      }
+    },
+    {
+      "kind": "validation",
+      "message": "Proposal passed policy and citation-ID checks",
+      "data": {}
+    }
+  ],
+  "receipt": null,
+  "status": "resolved"
+}

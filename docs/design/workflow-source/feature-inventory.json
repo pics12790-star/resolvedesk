@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "service": {
+    "name": "ResolveDesk",
+    "audience": "Portfolio reviewers and interviewers",
+    "video_goal": "Demonstrate a real Luna investigation through approved execution"
+  },
+  "features": [
+    {
+      "id": "inbox",
+      "order": 1,
+      "title": "Inbox",
+      "purpose": "A damaged-order ticket, ready for investigation",
+      "caption": "A damaged-order ticket, ready for investigation",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 6,
+      "start_marker": "inbox-start",
+      "end_marker": "inbox-end",
+      "focus": null
+    },
+    {
+      "id": "investigation",
+      "order": 2,
+      "title": "Investigation",
+      "purpose": "Luna investigates the order and checks store evidence",
+      "caption": "Luna investigates the order and checks store evidence",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 6.3,
+      "start_marker": "investigation-start",
+      "end_marker": "investigation-end",
+      "focus": null
+    },
+    {
+      "id": "policies",
+      "order": 3,
+      "title": "Policies",
+      "purpose": "Inspect cited policies and the underlying order evidence",
+      "caption": "Inspect cited policies and the underlying order evidence",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 13.2,
+      "start_marker": "policies-start",
+      "end_marker": "policies-end",
+      "focus": null
+    },
+    {
+      "id": "approval",
+      "order": 4,
+      "title": "Approval",
+      "purpose": "Review the proposal. A person approves the replacement",
+      "caption": "Review the proposal. A person approves the replacement",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 8.8,
+      "start_marker": "approval-start",
+      "end_marker": "approval-end",
+      "focus": null
+    },
+    {
+      "id": "receipt",
+      "order": 5,
+      "title": "Receipt",
+      "purpose": "The replacement is executed and its receipt verified",
+      "caption": "The replacement is executed and its receipt verified",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 5.4,
+      "start_marker": "receipt-start",
+      "end_marker": "receipt-end",
+      "focus": null
+    },
+    {
+      "id": "audit",
+      "order": 6,
+      "title": "Audit",
+      "purpose": "Inspect the audit trail, model calls, and execution metrics",
+      "caption": "Inspect the audit trail, model calls, and execution metrics",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 4.3,
+      "start_marker": "audit-start",
+      "end_marker": "audit-end",
+      "focus": null
+    },
+    {
+      "id": "evaluations",
+      "order": 7,
+      "title": "Evaluations",
+      "purpose": "Saved evaluations: 90 synthetic cases from an earlier run",
+      "caption": "Saved evaluations: 90 synthetic cases from an earlier run",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 5.7,
+      "start_marker": "evaluations-start",
+      "end_marker": "evaluations-end",
+      "focus": null
+    },
+    {
+      "id": "resolved",
+      "order": 8,
+      "title": "Resolved",
+      "purpose": "Resolved with evidence, human approval, and a verified receipt",
+      "caption": "Resolved with evidence, human approval, and a verified receipt",
+      "required": true,
+      "priority": 100,
+      "estimated_seconds": 3.5,
+      "start_marker": "resolved-start",
+      "end_marker": "resolved-end",
+      "focus": null
+    }
+  ]
+}

@@ -428,7 +428,13 @@ class TestRetrieve:
             assert set(r.keys()) == expected
 
     def test_retrieval_method_field(self):
-        expected = "hybrid_bm25_qdrant" if os.getenv("QDRANT_URL") else "hybrid_bm25_embedding"
+        expected = (
+            "hybrid_bm25_tfidf"
+            if os.getenv("RAG_DISABLE_EMBEDDINGS", "").lower() in {"1", "true", "yes", "on"}
+            else "hybrid_bm25_qdrant"
+            if os.getenv("QDRANT_URL")
+            else "hybrid_bm25_embedding"
+        )
         for r in retrieve("test"):
             assert r["retrieval"] == expected
 

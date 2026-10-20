@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "video": "../workflow-luna.webm",
+  "timebase": "source-video-seconds",
+  "markers": [
+    {
+      "name": "inbox-start",
+      "seconds": 0
+    },
+    {
+      "name": "inbox-end",
+      "seconds": 6
+    },
+    {
+      "name": "investigation-start",
+      "seconds": 22
+    },
+    {
+      "name": "investigation-end",
+      "seconds": 28.3
+    },
+    {
+      "name": "policies-start",
+      "seconds": 28.3
+    },
+    {
+      "name": "policies-end",
+      "seconds": 41.5
+    },
+    {
+      "name": "approval-start",
+      "seconds": 41.5
+    },
+    {
+      "name": "approval-end",
+      "seconds": 50.3
+    },
+    {
+      "name": "receipt-start",
+      "seconds": 56.8
+    },
+    {
+      "name": "receipt-end",
+      "seconds": 62.2
+    },
+    {
+      "name": "audit-start",
+      "seconds": 62.2
+    },
+    {
+      "name": "audit-end",
+      "seconds": 66.5
+    },
+    {
+      "name": "evaluations-start",
+      "seconds": 67.5
+    },
+    {
+      "name": "evaluations-end",
+      "seconds": 73.2
+    },
+    {
+      "name": "resolved-start",
+      "seconds": 74
+    },
+    {
+      "name": "resolved-end",
+      "seconds": 77.5
+    }
+  ]
+}

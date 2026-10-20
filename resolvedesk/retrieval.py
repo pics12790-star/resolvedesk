@@ -20,6 +20,7 @@ _EMBEDDING_MODEL = os.getenv("RAG_EMBEDDING_MODEL", "all-MiniLM-L6-v2")
 _QDRANT_URL = os.getenv("QDRANT_URL", "")
 _QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 _QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "resolvedesk_policies")
+_DISABLE_EMBEDDINGS = os.getenv("RAG_DISABLE_EMBEDDINGS", "").lower() in {"1", "true", "yes", "on"}
 _RRF_K = 60
 _CHUNK_MAX_CHARS = int(os.getenv("RAG_CHUNK_MAX_CHARS", "512"))
 _CHUNK_OVERLAP_CHARS = int(os.getenv("RAG_CHUNK_OVERLAP_CHARS", "128"))
@@ -170,6 +171,8 @@ def _bm25_rank(query, docs):
 
 def _embedding_rank(query, docs):
     """Return semantic ranking, or a deterministic lexical fallback offline."""
+    if _DISABLE_EMBEDDINGS:
+        return _tfidf_rank(query, docs)
     if _QDRANT_URL:
         try:
             return _qdrant_rank(query, docs)
@@ -284,7 +287,8 @@ def retrieve(query, k=3):
     parent policy level so that citation IDs stay valid.  Configure chunk
     size with ``RAG_CHUNK_MAX_CHARS`` / ``RAG_CHUNK_OVERLAP_CHARS``.
 
-    The embedding model is downloaded lazily by sentence-transformers.  Set
+    The embedding model is downloaded lazily by sentence-transformers. Set
+    ``RAG_DISABLE_EMBEDDINGS=true`` for small demo hosts, or set
     ``RAG_EMBEDDING_MODEL`` to a local model path for air-gapped deployments.
     """
     docs = policies()
@@ -301,5 +305,11 @@ def retrieve(query, k=3):
     }
     results = _deduplicate_by_parent(chunks, fused, k)
     for r in results:
-        r["retrieval"] = "hybrid_bm25_qdrant" if _QDRANT_URL else "hybrid_bm25_embedding"
+        r["retrieval"] = (
+            "hybrid_bm25_tfidf"
+            if _DISABLE_EMBEDDINGS
+            else "hybrid_bm25_qdrant"
+            if _QDRANT_URL
+            else "hybrid_bm25_embedding"
+        )
     return results

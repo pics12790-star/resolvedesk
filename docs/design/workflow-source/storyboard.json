@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "timing_source": "recording-markers",
+  "video": {
+    "width": 1600,
+    "height": 1000,
+    "fps": 60,
+    "duration_limit": 65.0,
+    "audio": false
+  },
+  "caption_style": {
+    "enabled": true,
+    "font_name": "Arial",
+    "font_size": 32,
+    "bottom_margin": 16,
+    "raised_margin": 150
+  },
+  "scenes": [
+    {
+      "id": "opening-hold",
+      "purpose": "Establish the application context before captions begin",
+      "kind": "still",
+      "source": "../workflow-luna.webm",
+      "duration": 1.0,
+      "frame_at": 0.0,
+      "caption": null,
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "inbox",
+      "purpose": "A damaged-order ticket, ready for investigation",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 0.0,
+        "end": 6.0
+      },
+      "caption": {
+        "text": "A damaged-order ticket, ready for investigation",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "investigation",
+      "purpose": "Luna investigates the order and checks store evidence",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 22.0,
+        "end": 28.3
+      },
+      "caption": {
+        "text": "Luna investigates the order and checks store evidence",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "policies",
+      "purpose": "Inspect cited policies and the underlying order evidence",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 28.3,
+        "end": 41.5
+      },
+      "caption": {
+        "text": "Inspect cited policies and the underlying order evidence",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "approval",
+      "purpose": "Review the proposal. A person approves the replacement",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 41.5,
+        "end": 50.3
+      },
+      "caption": {
+        "text": "Review the proposal. A person approves the replacement",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "receipt",
+      "purpose": "The replacement is executed and its receipt verified",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 56.8,
+        "end": 62.2
+      },
+      "caption": {
+        "text": "The replacement is executed and its receipt verified",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "audit",
+      "purpose": "Inspect the audit trail, model calls, and execution metrics",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 62.2,
+        "end": 66.5
+      },
+      "caption": {
+        "text": "Inspect the audit trail, model calls, and execution metrics",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "evaluations",
+      "purpose": "Saved evaluations: 90 synthetic cases from an earlier run",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 67.5,
+        "end": 73.2
+      },
+      "caption": {
+        "text": "Saved evaluations: 90 synthetic cases from an earlier run",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    },
+    {
+      "id": "resolved",
+      "purpose": "Resolved with evidence, human approval, and a verified receipt",
+      "kind": "video",
+      "source": "../workflow-luna.webm",
+      "trim": {
+        "start": 74.0,
+        "end": 77.5
+      },
+      "caption": {
+        "text": "Resolved with evidence, human approval, and a verified receipt",
+        "placement": "bottom"
+      },
+      "camera": null,
+      "transition": "cut"
+    }
+  ]
+}

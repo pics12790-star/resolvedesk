@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
+    "build:walkthrough": "tsc -b && vite build --mode walkthrough --outDir dist-walkthrough",
+    "dev:walkthrough": "vite --mode walkthrough --host 127.0.0.1",
+    "preview": "vite preview --host 127.0.0.1",
+    "preview:walkthrough": "vite preview --host 127.0.0.1 --outDir dist-walkthrough",
     "test:e2e": "playwright test"
   },
   "dependencies": {

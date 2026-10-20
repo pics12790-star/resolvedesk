@@ -1,0 +1,42 @@
+[
+  {
+    "id": "replacement",
+    "label": "Damaged item · replacement",
+    "subject": "My headphones arrived damaged",
+    "message": "The headphones arrived with a cracked ear cup. Could you send a replacement?",
+    "owner": "maya",
+    "source": "Live Luna workflow recorded 2026-10-20"
+  },
+  {
+    "id": "delivery",
+    "label": "Delivery enquiry",
+    "subject": "Where is my delivery?",
+    "message": "It missed the date by two days, but the tracking still changes. Do I just wait?",
+    "owner": "alex",
+    "source": "Saved benchmark case shipping-two-days-1 · 2026-10-07"
+  },
+  {
+    "id": "refund-status",
+    "label": "Refund status enquiry",
+    "subject": "Has my refund been processed?",
+    "message": "The money still has not landed back on my card. Did the return payment actually start?",
+    "owner": "priya",
+    "source": "Saved benchmark case refund-pending-1 · 2026-10-07"
+  },
+  {
+    "id": "refund",
+    "label": "Damaged item · refund approval",
+    "subject": "Damaged headphones — request a refund",
+    "message": "The box was crushed and the headphones inside are cracked. If you cannot send the same thing, put the money back.",
+    "owner": "maya",
+    "source": "Saved benchmark case damage-no-stock-1 · 2026-10-07"
+  },
+  {
+    "id": "escalation",
+    "label": "Delivered but missing · escalation",
+    "subject": "Delivered, but my parcel is missing",
+    "message": "It says delivered, but nothing is at my door, desk, lobby, or mailbox.",
+    "owner": "alex",
+    "source": "Saved benchmark case shipping-disputed-1 · 2026-10-07"
+  }
+]

@@ -1,0 +1,171 @@
+{
+  "id": "refund",
+  "label": "Damaged item · refund approval",
+  "subject": "Damaged headphones — request a refund",
+  "message": "The box was crushed and the headphones inside are cracked. If you cannot send the same thing, put the money back.",
+  "owner": "maya",
+  "source": "Saved benchmark case damage-no-stock-1 · 2026-10-07",
+  "order": {
+    "id": "ORD-1004",
+    "product": "Studio headphones",
+    "product_id": "E-0a795ae1eb52-product",
+    "total_cents": 12900,
+    "currency": "USD",
+    "delivered_days_ago": 4,
+    "replacement_id": null,
+    "shipment_status": "delivered",
+    "days_late": 0,
+    "refund_status": null,
+    "stock": 0,
+    "unlimited": false
+  },
+  "state": {
+    "intent": "damaged_item",
+    "policies": [
+      {
+        "id": "DAM-01",
+        "title": "Damaged items, replacement eligibility, and inspection evidence",
+        "text": "The customer may not use the exact word \"damaged.\" Phrases such as \"it came cracked,\" \"the left side is dead out of the box,\" \"the screen has lines,\" \"the box was crushed and the unit will not turn on,\" \"I need a new one,\" or \"this arrived messed up\" should be treated as possible damaged-item reports.",
+        "version": 1,
+        "score": 0.0323,
+        "sha256": "5558e0c328735f9a649278dce1d06b515a1f66e646cb9f4d747cfacd5c2298d2",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "SHIP-01",
+        "title": "Delivery delays, lost shipments, and tracking exceptions",
+        "text": "These cases often need carrier evidence and cannot be safely resolved by an automatic agent. The agent must not create a duplicate replacement merely because the customer is impatient. A late package is not the same as an arrived damaged product. If a replacement was already approved by a reviewer, the agent can provide status but should not create another shipment. For interview demos, a strong answer distinguishes between delay, delivered-but-missing, and delivered-damaged.",
+        "version": 1,
+        "score": 0.0303,
+        "sha256": "fe8d668bc5b863c497649a9e3ff24528658ffdef81cbcd7b1497ce8b2c3f8354",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "RET-01",
+        "title": "Returns, remorse refunds, and unopened items",
+        "text": "If the project does not have return-window data, escalate instead of inventing eligibility. The agent should not route a remorse return through DAM-01 just because the customer wants money back. Damage policy is for arrival damage. Refund policy is for refund status. Return policy is for voluntary returns. If a customer says \"I need a new one\" after receiving the wrong color or size, clarify whether the product is damaged, wrong item, or exchange request.",
+        "version": 1,
+        "score": 0.0283,
+        "sha256": "09a84a52d949fbf1c07fc9878586a1bc26049e8007160a89a868bd2e51a82f12",
+        "retrieval": "hybrid_bm25_qdrant"
+      }
+    ],
+    "evidence": {
+      "id": "ORD-1004",
+      "product": "Studio headphones",
+      "product_id": "E-0a795ae1eb52-product",
+      "total_cents": 12900,
+      "currency": "USD",
+      "delivered_days_ago": 4,
+      "replacement_id": null,
+      "shipment_status": "delivered",
+      "days_late": 0,
+      "refund_status": null,
+      "stock": 0,
+      "unlimited": false
+    },
+    "proposal": {
+      "action": "refund",
+      "explanation": "The headphones arrived cracked, and the supplied facts show no replacement stock. A refund is the allowed action, but it requires reviewer approval and has not been issued. DAM-01 supports treating this as an arrival-damage report.",
+      "customer_response": "I’m sorry the headphones arrived cracked. The same model is currently out of stock, so I can submit a refund for reviewer approval instead. No refund has been issued yet.",
+      "citations": [
+        "DAM-01"
+      ],
+      "order_id": "ORD-1004",
+      "amount_cents": 12900
+    },
+    "metrics": [
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 116,
+        "output_tokens": 35,
+        "latency_ms": 1713,
+        "estimated_cost_usd": null
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 1055,
+        "output_tokens": 352,
+        "latency_ms": 9538,
+        "estimated_cost_usd": null
+      }
+    ],
+    "tool_calls": 6,
+    "automated_ms": 20821.11883163452
+  },
+  "investigation": [
+    {
+      "kind": "classify",
+      "message": "Request classified",
+      "data": {
+        "intent": "damaged_item",
+        "provider": "openai"
+      }
+    },
+    {
+      "kind": "retrieve",
+      "message": "Relevant policies retrieved",
+      "data": {
+        "sources": [
+          "DAM-01",
+          "SHIP-01",
+          "RET-01"
+        ]
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_order",
+      "data": {
+        "id": "ORD-1004",
+        "product": "Studio headphones",
+        "product_id": "E-0a795ae1eb52-product",
+        "total_cents": 12900,
+        "currency": "USD",
+        "delivered_days_ago": 4,
+        "replacement_id": null
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_shipment",
+      "data": {
+        "delivered_days_ago": 4,
+        "shipment_status": "delivered",
+        "days_late": 0
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_refund_status",
+      "data": {
+        "replacement_id": null,
+        "refund_status": null
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_inventory",
+      "data": {
+        "product_id": "E-0a795ae1eb52-product",
+        "stock": 0,
+        "unlimited": false
+      }
+    },
+    {
+      "kind": "validation",
+      "message": "Proposal passed policy and citation-ID checks",
+      "data": {}
+    }
+  ],
+  "receipt": {
+    "id": "RCPT-8022b6cb214c",
+    "order_id": "ORD-1004",
+    "action": "refund",
+    "simulated": true,
+    "amount_cents": 12900
+  },
+  "status": "resolved"
+}

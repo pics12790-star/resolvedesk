@@ -1,12 +1,13 @@
 import {useState} from 'react';
+import {isWalkthrough} from './api';
 import {EventData,Joyride,STATUS,Step} from 'react-joyride';
 import {Map} from 'lucide-react';
 
 const steps:Step[]=[
  {target:'[data-tour="identity-switcher"]',skipBeacon:true,title:'Choose a demo role',content:'Switch between customer and reviewer identities. For the full approval flow, use Jordan Smith as the reviewer.'},
- {target:'[data-tour="new-ticket"]',skipBeacon:true,title:'Create a customer issue',content:'Open a ticket from here. If you need an order number, the form can create one by buying a seeded demo product first.'},
+ {target:'[data-tour="new-ticket"]',skipBeacon:true,title:'Create a customer issue',content:isWalkthrough?'Choose a saved enquiry workflow, edit its details, and create a sample order if needed.':'Open a ticket from here. If you need an order number, the form can create one by buying a seeded demo product first.'},
  {target:'[data-tour="ticket-list"]',skipBeacon:true,title:'Select a ticket',content:'The inbox is the working queue. Pick an existing ticket or the one you just created to inspect the support case.'},
- {target:'[data-tour="run-agent"]',skipBeacon:true,title:'Start the investigation',content:'This kicks off the LangGraph agent: classify intent, retrieve policies, call commerce tools, and draft a policy-backed resolution.'},
+ {target:'[data-tour="run-agent"]',skipBeacon:true,title:'Start the investigation',content:isWalkthrough?'Replay a captured Luna investigation: classification, cited policies, order checks, and a resolution ready for review. No live API calls are made.':'This kicks off the LangGraph agent: classify intent, retrieve policies, call commerce tools, and draft a policy-backed resolution.'},
  {target:'[data-tour="evidence-panel"]',skipBeacon:true,title:'Inspect evidence',content:'Order data, retrieved policy chunks, citations, and store facts appear here so the answer is explainable.'},
  {target:'[data-tour="audit-timeline"]',skipBeacon:true,title:'Follow the audit trail',content:'Every major step is logged: classification, retrieval, tool calls, validation, approval, and final receipt.'},
  {target:'[data-tour="approval-panel"]',skipBeacon:true,title:'Review the proposal',content:'Replacement and refund actions pause for reviewer approval before the simulated store changes.'},

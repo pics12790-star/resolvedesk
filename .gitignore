@@ -4,6 +4,7 @@
 .venv/
 node_modules/
 dist/
+dist-walkthrough/
 __pycache__/
 .pytest_cache/
 .ruff_cache/

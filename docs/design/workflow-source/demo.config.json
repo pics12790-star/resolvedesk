@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "project_name": "ResolveDesk live Luna workflow",
+  "start_url": "http://127.0.0.1:8000",
+  "video": {
+    "width": 1600,
+    "height": 1000,
+    "fps": 60,
+    "duration_limit": 65,
+    "opening_hold_seconds": 1,
+    "audio": false
+  },
+  "captions": {
+    "enabled": true,
+    "font_name": "Arial",
+    "font_size": 32,
+    "bottom_margin": 16,
+    "raised_margin": 150
+  },
+  "recording": {
+    "output_video": "../workflow-luna.webm"
+  },
+  "editing": {
+    "pre_roll_seconds": 0,
+    "post_roll_seconds": 0,
+    "default_transition": "cut"
+  }
+}

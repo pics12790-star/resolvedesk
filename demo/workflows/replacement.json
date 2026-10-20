@@ -1,0 +1,171 @@
+{
+  "id": "replacement",
+  "label": "Damaged item · replacement",
+  "subject": "My headphones arrived damaged",
+  "message": "The headphones arrived with a cracked ear cup. Could you send a replacement?",
+  "owner": "maya",
+  "source": "Live Luna workflow recorded 2026-10-20",
+  "order": {
+    "id": "ORD-1001",
+    "product": "Studio headphones",
+    "product_id": "P-1",
+    "total_cents": 12900,
+    "currency": "USD",
+    "delivered_days_ago": 4,
+    "replacement_id": null,
+    "shipment_status": "delivered",
+    "days_late": 0,
+    "refund_status": null,
+    "stock": 8,
+    "unlimited": false
+  },
+  "state": {
+    "intent": "damaged_item",
+    "policies": [
+      {
+        "id": "DAM-01",
+        "title": "Damaged items, replacement eligibility, and inspection evidence",
+        "text": "The customer may not use the exact word \"damaged.\" Phrases such as \"it came cracked,\" \"the left side is dead out of the box,\" \"the screen has lines,\" \"the box was crushed and the unit will not turn on,\" \"I need a new one,\" or \"this arrived messed up\" should be treated as possible damaged-item reports.",
+        "version": 1,
+        "score": 0.0323,
+        "sha256": "5558e0c328735f9a649278dce1d06b515a1f66e646cb9f4d747cfacd5c2298d2",
+        "retrieval": "hybrid_bm25_tfidf"
+      },
+      {
+        "id": "SHIP-01",
+        "title": "Delivery delays, lost shipments, and tracking exceptions",
+        "text": "These cases often need carrier evidence and cannot be safely resolved by an automatic agent. The agent must not create a duplicate replacement merely because the customer is impatient. A late package is not the same as an arrived damaged product. If a replacement was already approved by a reviewer, the agent can provide status but should not create another shipment. For interview demos, a strong answer distinguishes between delay, delivered-but-missing, and delivered-damaged.",
+        "version": 1,
+        "score": 0.0308,
+        "sha256": "fe8d668bc5b863c497649a9e3ff24528658ffdef81cbcd7b1497ce8b2c3f8354",
+        "retrieval": "hybrid_bm25_tfidf"
+      },
+      {
+        "id": "FRA-01",
+        "title": "Abuse prevention, fraud signals, and safe refusal",
+        "text": "If a customer reports account takeover, unknown orders, or unauthorized charges, escalate immediately. Do not change addresses, issue refunds, or send replacement products from the same conversation until ownership is reverified.",
+        "version": 1,
+        "score": 0.0294,
+        "sha256": "41e13cc0a163bc63c781e90f8c16c8b29757b499cc2c117364fc85c79409f7fe",
+        "retrieval": "hybrid_bm25_tfidf"
+      }
+    ],
+    "evidence": {
+      "id": "ORD-1001",
+      "product": "Studio headphones",
+      "product_id": "P-1",
+      "total_cents": 12900,
+      "currency": "USD",
+      "delivered_days_ago": 4,
+      "replacement_id": null,
+      "shipment_status": "delivered",
+      "days_late": 0,
+      "refund_status": null,
+      "stock": 8,
+      "unlimited": false
+    },
+    "proposal": {
+      "action": "replacement",
+      "explanation": "The cracked ear cup is a possible damaged-item report under DAM-01. A replacement is the allowed action, but reviewer approval is required; no replacement has been confirmed or sent.",
+      "customer_response": "I’m sorry your headphones arrived with a cracked ear cup. I can propose a replacement for reviewer approval. It hasn’t been confirmed or sent yet.",
+      "citations": [
+        "DAM-01"
+      ],
+      "order_id": "ORD-1001",
+      "amount_cents": null
+    },
+    "metrics": [
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 112,
+        "output_tokens": 38,
+        "latency_ms": 7432,
+        "estimated_cost_usd": null
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 988,
+        "output_tokens": 319,
+        "latency_ms": 4646,
+        "estimated_cost_usd": null
+      }
+    ],
+    "tool_calls": 6,
+    "automated_ms": 29602.46706008911
+  },
+  "investigation": [
+    {
+      "kind": "classify",
+      "message": "Request classified",
+      "data": {
+        "intent": "damaged_item",
+        "provider": "openai"
+      }
+    },
+    {
+      "kind": "retrieve",
+      "message": "Relevant policies retrieved",
+      "data": {
+        "sources": [
+          "DAM-01",
+          "SHIP-01",
+          "FRA-01"
+        ]
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_order",
+      "data": {
+        "id": "ORD-1001",
+        "product": "Studio headphones",
+        "product_id": "P-1",
+        "total_cents": 12900,
+        "currency": "USD",
+        "delivered_days_ago": 4,
+        "replacement_id": null
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_shipment",
+      "data": {
+        "delivered_days_ago": 4,
+        "shipment_status": "delivered",
+        "days_late": 0
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_refund_status",
+      "data": {
+        "replacement_id": null,
+        "refund_status": null
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_inventory",
+      "data": {
+        "product_id": "P-1",
+        "stock": 8,
+        "unlimited": false
+      }
+    },
+    {
+      "kind": "validation",
+      "message": "Proposal passed policy and citation-ID checks",
+      "data": {}
+    }
+  ],
+  "receipt": {
+    "id": "RCPT-1129de67eae8",
+    "order_id": "ORD-1001",
+    "action": "replacement",
+    "simulated": true,
+    "product": "Studio headphones"
+  },
+  "status": "resolved"
+}

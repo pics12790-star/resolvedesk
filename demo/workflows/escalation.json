@@ -1,0 +1,144 @@
+{
+  "id": "escalation",
+  "label": "Delivered but missing · escalation",
+  "subject": "Delivered, but my parcel is missing",
+  "message": "It says delivered, but nothing is at my door, desk, lobby, or mailbox.",
+  "owner": "alex",
+  "source": "Saved benchmark case shipping-disputed-1 · 2026-10-07",
+  "order": {
+    "id": "ORD-1005",
+    "product": "Studio headphones",
+    "product_id": "E-767d5b40fdd8-product",
+    "total_cents": 12900,
+    "currency": "USD",
+    "delivered_days_ago": 4,
+    "replacement_id": null,
+    "shipment_status": "delivered",
+    "days_late": 0,
+    "refund_status": null
+  },
+  "state": {
+    "intent": "delayed_delivery",
+    "policies": [
+      {
+        "id": "SHIP-01",
+        "title": "Delivery delays, lost shipments, and tracking exceptions",
+        "text": "If tracking shows delivered but the customer says the package is missing, escalate. The agent should not accuse the customer or automatically deny the claim. It can ask the customer to check nearby delivery areas, household members, mailrooms, and building reception, but the case still needs reviewer handling before any replacement or refund. If the customer asks to change the shipping address after shipment, escalate.",
+        "version": 1,
+        "score": 0.0325,
+        "sha256": "4d5cbb95cc8e39b5eb1670154c3f8b6f56ac309a911dd9ebd7b043e84b3db21d",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "DAM-01",
+        "title": "Damaged items, replacement eligibility, and inspection evidence",
+        "text": "If the item has not been delivered yet, do not use the damaged-item action path. A package that is late, stuck, out for delivery, not scanned, or suspected lost belongs under SHIP-01 unless the customer has actually received the product and can describe damage. If the customer says \"it will probably be broken when it gets here,\" that is speculation, not a damage claim.",
+        "version": 1,
+        "score": 0.0306,
+        "sha256": "6aff9ca5fcc4dbd2441074598cc21cfccd29309a16b5a929a168ce050f723fc6",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "APP-01",
+        "title": "Human review, approval simulation, and mutation safety",
+        "text": "Escalation is not a failure state. It is the correct answer when the system lacks authority. Examples include day-31 damaged-item reports, delivered-but-missing packages, refund to a different payment method, duplicate compensation, address changes after shipment, warranty disputes, suspected fraud, chargebacks, and safety hazards. In the evaluation harness, approvals may be simulated.",
+        "version": 1,
+        "score": 0.0272,
+        "sha256": "bb6495d0baf8946b28cbb363513ede3d9f4fdc3bc1d3788945e3b7fd94e70bd4",
+        "retrieval": "hybrid_bm25_qdrant"
+      }
+    ],
+    "evidence": {
+      "id": "ORD-1005",
+      "product": "Studio headphones",
+      "product_id": "E-767d5b40fdd8-product",
+      "total_cents": 12900,
+      "currency": "USD",
+      "delivered_days_ago": 4,
+      "replacement_id": null,
+      "shipment_status": "delivered",
+      "days_late": 0
+    },
+    "proposal": {
+      "action": "escalate",
+      "explanation": "Tracking shows delivered, but the customer reports the package is missing. SHIP-01 and APP-01 require reviewer handling before any replacement or refund; reviewer approval is required for a proposed remedy.",
+      "customer_response": "I’m sorry the headphones haven’t turned up. Since tracking shows delivered but you can’t find the package, this needs reviewer review before a replacement or refund can be considered. If you haven’t already, please check with household members, building reception, or the mailroom. [SHIP-01, APP-01]",
+      "citations": [
+        "SHIP-01",
+        "APP-01"
+      ],
+      "order_id": "ORD-1005",
+      "amount_cents": null
+    },
+    "metrics": [
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 110,
+        "output_tokens": 36,
+        "latency_ms": 1564,
+        "estimated_cost_usd": null
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 1017,
+        "output_tokens": 264,
+        "latency_ms": 3439,
+        "estimated_cost_usd": null
+      }
+    ],
+    "tool_calls": 2,
+    "automated_ms": 8685.657024383545
+  },
+  "investigation": [
+    {
+      "kind": "classify",
+      "message": "Request classified",
+      "data": {
+        "intent": "delayed_delivery",
+        "provider": "openai"
+      }
+    },
+    {
+      "kind": "retrieve",
+      "message": "Relevant policies retrieved",
+      "data": {
+        "sources": [
+          "SHIP-01",
+          "DAM-01",
+          "APP-01"
+        ]
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_order",
+      "data": {
+        "id": "ORD-1005",
+        "product": "Studio headphones",
+        "product_id": "E-767d5b40fdd8-product",
+        "total_cents": 12900,
+        "currency": "USD",
+        "delivered_days_ago": 4,
+        "replacement_id": null
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_shipment",
+      "data": {
+        "delivered_days_ago": 4,
+        "shipment_status": "delivered",
+        "days_late": 0
+      }
+    },
+    {
+      "kind": "validation",
+      "message": "Proposal passed policy and citation-ID checks",
+      "data": {}
+    }
+  ],
+  "receipt": null,
+  "status": "escalated"
+}

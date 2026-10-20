@@ -1,0 +1,140 @@
+{
+  "id": "refund-status",
+  "label": "Refund status enquiry",
+  "subject": "Has my refund been processed?",
+  "message": "The money still has not landed back on my card. Did the return payment actually start?",
+  "owner": "priya",
+  "source": "Saved benchmark case refund-pending-1 · 2026-10-07",
+  "order": {
+    "id": "ORD-1003",
+    "product": "Studio headphones",
+    "product_id": "E-95b2e63b8e3b-product",
+    "total_cents": 12900,
+    "currency": "USD",
+    "delivered_days_ago": 4,
+    "replacement_id": null,
+    "refund_status": "pending",
+    "shipment_status": "delivered"
+  },
+  "state": {
+    "intent": "refund_status",
+    "policies": [
+      {
+        "id": "REF-01",
+        "title": "Refund lifecycle, payment rails, and status communication",
+        "text": "Effective 2026-01-01. Version 1. Refund status questions are informational unless another policy authorizes a new refund. Customers may ask directly, such as \"where is my refund,\" or indirectly, such as \"did the money start moving back,\" \"my card still has the charge,\" \"I was told I would get paid back,\" or \"has the reversal happened.\" These should be classified as refund-status intent when the customer is asking about money already expected to return.",
+        "version": 1,
+        "score": 0.032,
+        "sha256": "24da15f25116b9b405987c0496c2cb966bcf48f7320be8e7ac80dbcf2e7834be",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "PAY-01",
+        "title": "Payment verification, failed charges, and chargebacks",
+        "text": "Authorization holds usually disappear without refund. If two captured payments exist, escalate to payment review. If a chargeback is open, do not issue a separate refund automatically. Chargeback cases must be handled by a reviewer because the card network process can reverse funds independently. The agent must never ask for full card number, CVV, banking password, OTP, or screenshot showing complete payment credentials.",
+        "version": 1,
+        "score": 0.0308,
+        "sha256": "6392b294fea83424c5b7d5fd030fe20ff4d69e9a32c1fc334cf4e6fe7287dbba",
+        "retrieval": "hybrid_bm25_qdrant"
+      },
+      {
+        "id": "RET-01",
+        "title": "Returns, remorse refunds, and unopened items",
+        "text": "If the project does not have return-window data, escalate instead of inventing eligibility. The agent should not route a remorse return through DAM-01 just because the customer wants money back. Damage policy is for arrival damage. Refund policy is for refund status. Return policy is for voluntary returns. If a customer says \"I need a new one\" after receiving the wrong color or size, clarify whether the product is damaged, wrong item, or exchange request.",
+        "version": 1,
+        "score": 0.0302,
+        "sha256": "09a84a52d949fbf1c07fc9878586a1bc26049e8007160a89a868bd2e51a82f12",
+        "retrieval": "hybrid_bm25_qdrant"
+      }
+    ],
+    "evidence": {
+      "id": "ORD-1003",
+      "product": "Studio headphones",
+      "product_id": "E-95b2e63b8e3b-product",
+      "total_cents": 12900,
+      "currency": "USD",
+      "delivered_days_ago": 4,
+      "replacement_id": null,
+      "refund_status": "pending"
+    },
+    "proposal": {
+      "action": "answer",
+      "explanation": "The verified order record shows the refund status as pending. It does not confirm that the payment reversal has started or completed. REF-01 treats this as a refund-status question.",
+      "customer_response": "I’m sorry it hasn’t appeared yet. The order record currently shows the refund as pending, so I can’t confirm that the return payment has started or completed. [REF-01]",
+      "citations": [
+        "REF-01"
+      ],
+      "order_id": "ORD-1003",
+      "amount_cents": null
+    },
+    "metrics": [
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 110,
+        "output_tokens": 26,
+        "latency_ms": 3656,
+        "estimated_cost_usd": null
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "input_tokens": 1039,
+        "output_tokens": 192,
+        "latency_ms": 3075,
+        "estimated_cost_usd": null
+      }
+    ],
+    "tool_calls": 2,
+    "automated_ms": 10556.205034255981
+  },
+  "investigation": [
+    {
+      "kind": "classify",
+      "message": "Request classified",
+      "data": {
+        "intent": "refund_status",
+        "provider": "openai"
+      }
+    },
+    {
+      "kind": "retrieve",
+      "message": "Relevant policies retrieved",
+      "data": {
+        "sources": [
+          "REF-01",
+          "PAY-01",
+          "RET-01"
+        ]
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_order",
+      "data": {
+        "id": "ORD-1003",
+        "product": "Studio headphones",
+        "product_id": "E-95b2e63b8e3b-product",
+        "total_cents": 12900,
+        "currency": "USD",
+        "delivered_days_ago": 4,
+        "replacement_id": null
+      }
+    },
+    {
+      "kind": "tool",
+      "message": "get_refund_status",
+      "data": {
+        "replacement_id": null,
+        "refund_status": "pending"
+      }
+    },
+    {
+      "kind": "validation",
+      "message": "Proposal passed policy and citation-ID checks",
+      "data": {}
+    }
+  ],
+  "receipt": null,
+  "status": "resolved"
+}

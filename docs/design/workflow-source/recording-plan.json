@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "recorder": "../record-workflow.cjs",
+  "notes": "Custom recorder waits for actual API completion and validates the live model metrics and receipt.",
+  "actions": [
+    {
+      "type": "goto",
+      "url": "http://127.0.0.1:8000"
+    },
+    {
+      "type": "wait_for",
+      "selector": "button:has-text('Start investigation')"
+    },
+    {
+      "type": "click",
+      "selector": "button:has-text('Start investigation')"
+    },
+    {
+      "type": "wait_for",
+      "selector": "button:has-text('Approve replacement')",
+      "timeout_ms": 120000
+    },
+    {
+      "type": "click",
+      "selector": ".policy-citations details:nth-child(1) summary"
+    },
+    {
+      "type": "click",
+      "selector": ".policy-citations details:nth-child(2) summary"
+    },
+    {
+      "type": "click",
+      "selector": ".timeline li:has-text('get order') summary"
+    },
+    {
+      "type": "click",
+      "selector": ".timeline li:has-text('get order') summary"
+    },
+    {
+      "type": "click",
+      "selector": "button:has-text('Approve replacement')"
+    },
+    {
+      "type": "wait_for",
+      "selector": ".receipt",
+      "timeout_ms": 60000
+    },
+    {
+      "type": "click",
+      "selector": "nav button:has-text('Evaluations')"
+    },
+    {
+      "type": "wait_for",
+      "selector": ".eval-stats"
+    },
+    {
+      "type": "click",
+      "selector": "nav button:has-text('Inbox')"
+    }
+  ]
+}

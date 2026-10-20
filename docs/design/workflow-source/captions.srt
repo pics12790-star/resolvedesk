@@ -1,0 +1,31 @@
+1
+00:00:01,000 --> 00:00:07,000
+A damaged-order ticket, ready for investigation
+
+2
+00:00:07,000 --> 00:00:13,300
+Luna investigates the order and checks store evidence
+
+3
+00:00:13,300 --> 00:00:26,500
+Inspect cited policies and the underlying order evidence
+
+4
+00:00:26,500 --> 00:00:35,300
+Review the proposal. A person approves the replacement
+
+5
+00:00:35,300 --> 00:00:40,700
+The replacement is executed and its receipt verified
+
+6
+00:00:40,700 --> 00:00:45,000
+Inspect the audit trail, model calls, and execution metrics
+
+7
+00:00:45,000 --> 00:00:50,700
+Saved evaluations: 90 synthetic cases from an earlier run
+
+8
+00:00:50,700 --> 00:00:54,200
+Resolved with evidence, human approval, and a verified receipt
